@@ -3,7 +3,7 @@ function makeRequest() {
   let PROJECT_ROUTE = "projects/orbital-age-377622"
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Hoja 1")
 
-  // INSERT KUBERNETES TOKEN HERE
+  // INSERT KUBERNETES TOKEN HERE!
   const kubeToken = ""
   // ****************************
   
