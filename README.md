@@ -2,7 +2,7 @@
 
 ### ¿Qué hace esta aplicación?
 
-Kubesheets permite ver los Pods que estan presentes en los Clusters de Kubernetes que hayas creado en Google Cloud usando el Google Kubernetes Engine (GKE)
+Kubesheets permite incluír los nombres de los Pods que estan presentes en los Clusters de Kubernetes que hayas creado en Google Cloud usando el Google Kubernetes Engine (GKE), en una hoja de Google Sheets.
 
 ### Requisitos para que funcione
 
@@ -66,5 +66,20 @@ kubectl create clusterrolebinding service-reader-pod \
     echo $TOKEN
 ```
 3. Creamos una nueva hoja de cálculo de Google Sheets y, en la cinta superior de opciones, seleccionamos *Extenciones > Appscript*. Esto va a crear un nuevo proyecto de Appscript para que trabajemos.
+
+![image](https://user-images.githubusercontent.com/125300618/218547280-5ed66d41-db73-4ab0-b8a0-48e9c9d61522.png)
+
 4. Copiamos el código que aparece en el repositorio dentro de *main.gs* a la nueva hoja del proyecto de Appscript. Recorda asignarle a la variable "*kubeToken*" el valor de tu Token obtenido en el Paso 2.
-5. Ejecutamos la función *makeRequest()*
+
+![image](https://user-images.githubusercontent.com/125300618/218547469-4ce1b165-fa1c-4abc-b7d8-d4f6fabe0f6e.png)
+
+
+5. En la configuración del proyecto de Appscript, comprobamos que tenemos marcada la opción "*Mostrar el archivo de manifiesto "appsscript.json" en el editor*".
+
+  ![image](https://user-images.githubusercontent.com/125300618/218546963-3d74d7e7-acdc-4715-879c-4838c9e63ea2.png)
+
+6. Copiamos el contenido del archivo "*appscript.json" del repositorio al archivo dentro de nuestro proyecto Appscript
+
+![image](https://user-images.githubusercontent.com/125300618/218547126-e8b76dbb-8676-493c-a3b8-fcc20d66923f.png)
+
+7. Ejecutamos la función "*makeRequest*"
