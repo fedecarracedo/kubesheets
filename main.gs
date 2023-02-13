@@ -1,9 +1,9 @@
 function makeRequest() {
   try {
-    let ACCESS_TOKEN = ScriptApp.getOAuthToken()
+    const ACCESS_TOKEN = ScriptApp.getOAuthToken()
 
     // INSERT PROJECT ID HERE!
-    let PROJECT_ID = ""
+    const PROJECT_ID = ""
     // ****************************
 
     // INSERT KUBERNETES TOKEN HERE!
@@ -40,6 +40,5 @@ function makeRequest() {
   } catch(e) {
     Logger.log("Error en el procesamiento: " + e)
   }
-
 
 }
