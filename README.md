@@ -32,7 +32,7 @@ kubectl create clusterrolebinding service-reader-pod \
 ### ¿Cómo se usa?
 
 1. Creamos un Cluster en GKE. <a href="https://cloud.google.com/binary-authorization/docs/getting-started-cli?hl=es-419">Link al instructivo</a>
-2. Obtenemos nuestro Token en Kubectl y lo guardamos. Copia y pega este código en la consola, reemplazando *<YOUR CLUSTER NAME>* con el nombre del Cluster al que desees acceder:
+2. Obtenemos nuestro Token en Kubectl y lo guardamos. Copia y pega este código en la consola, reemplazando *YOUR CLUSTER NAME* con el nombre del Cluster al que desees acceder:
 ```
     # Check all possible clusters, as your .KUBECONFIG may have multiple contexts:
     kubectl config view -o jsonpath='{"Cluster name\tServer\n"}{range .clusters[*]}{.name}{"\t"}{.cluster.server}{"\n"}{end}'
