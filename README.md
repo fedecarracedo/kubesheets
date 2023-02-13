@@ -9,14 +9,14 @@ Kubesheets permite incluír los nombres de los Pods que estan presentes en los C
 Para que Kubesheets funcione, debemos darle al role *default:default* los permisos necesarios para leer Pods. Esto podemos lograrlo creando un ClusterRole dentro de la Resource Definition de nuestros pods de la siguiente forma:
 
 ```
-kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
 metadata:
   namespace: default
   name: service-reader
 rules:
 - apiGroups: [""] # "" indicates the core API group
-  resources: ["services"]
+  resources: ["services", "pods"]
   verbs: ["get", "watch", "list"]
   
 ```
