@@ -7,7 +7,7 @@ function makeRequest() {
     // ****************************
 
     // INSERT KUBERNETES TOKEN HERE!
-    const kubeToken = ""
+    const KUBERNETES_TOKEN = ""
     // ****************************
     
 
@@ -23,7 +23,7 @@ function makeRequest() {
 
     if(kubeToken !== "") {
       let podsResponse = UrlFetchApp.fetch(PUBLIC_ADRESS, {"headers": {
-        Authorization: 'Bearer ' + kubeToken
+        Authorization: 'Bearer ' + KUBERNETES_TOKEN
       }, validateHttpsCertificates: false, muteHttpExceptions: true})
       let podsResponseObj = JSON.parse(podsResponse)
 
