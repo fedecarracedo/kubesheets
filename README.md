@@ -4,6 +4,31 @@
 
 Kubesheets permite ver los Pods que estan presentes en los Clusters de Kubernetes que hayas creado en Google Cloud usando el Google Kubernetes Engine (GKE)
 
+### Requisitos para que funcione
+
+Para que Kubesheets funcione, debemos darle al role *default:default* los permisos necesarios para leer Pods. Esto podemos lograrlo creando un ClusterRole dentro de la Resource Definition de nuestros pods de la siguiente forma:
+
+```
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: service-reader
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["services"]
+  verbs: ["get", "watch", "list"]
+  
+```
+
+Y luego bindeando ese rol a la cuenta *default:default* desde la consola usando kubectl:
+
+```
+kubectl create clusterrolebinding service-reader-pod \
+  --clusterrole=service-reader  \
+  --serviceaccount=default:default
+```
+
 ### ¿Cómo se usa?
 
 1. Creamos un Cluster en GKE. <a href="https://cloud.google.com/binary-authorization/docs/getting-started-cli?hl=es-419">Link al instructivo</a>
@@ -40,6 +65,6 @@ Kubesheets permite ver los Pods que estan presentes en los Clusters de Kubernete
 
     echo $TOKEN
 ```
-3. Creamos una nueva hoja de cálculo de Google Sheets y, en la cinta superior de opciones, seleccionamos *Extenciones > Appscript*. Esto va a crear un nuevo proyecto de Appscript para que trabajemos
+3. Creamos una nueva hoja de cálculo de Google Sheets y, en la cinta superior de opciones, seleccionamos *Extenciones > Appscript*. Esto va a crear un nuevo proyecto de Appscript para que trabajemos.
 4. Copiamos el código que aparece en el repositorio dentro de *main.gs* a la nueva hoja del proyecto de Appscript. Recorda asignarle a la variable "*kubeToken*" el valor de tu Token obtenido en el Paso 2.
 5. Ejecutamos la función *makeRequest()*
