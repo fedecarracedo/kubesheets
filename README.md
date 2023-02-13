@@ -33,6 +33,9 @@ kubectl create clusterrolebinding service-reader-pod \
 
 1. Creamos un Cluster en GKE y le agregamos nuestros Pods. <a href="https://cloud.google.com/binary-authorization/docs/getting-started-cli?hl=es-419">Link al instructivo</a>
 
+![image](https://user-images.githubusercontent.com/125300618/218554601-11967200-bbb6-4899-b54d-53b108d3f7f9.png)
+
+
 2. Creamos una nueva hoja de cálculo de Google Sheets y, en la cinta superior de opciones, seleccionamos *Extenciones > Appscript*. Esto va a crear un nuevo proyecto de Appscript para que trabajemos.
 
 ![image](https://user-images.githubusercontent.com/125300618/218547280-5ed66d41-db73-4ab0-b8a0-48e9c9d61522.png)
@@ -76,15 +79,18 @@ kubectl create clusterrolebinding service-reader-pod \
     echo $TOKEN
 ```
 
-5. Copiamos el código que aparece en el repositorio dentro de *main.gs* a la nueva hoja del proyecto de Appscript. Recorda asignarle a la variable "*kubeToken*" el valor de tu Token obtenido en el Paso 4.
+![image](https://user-images.githubusercontent.com/125300618/218555118-2b4ec39e-00fb-439b-8a2f-07d836c4464c.png)
 
-![image](https://user-images.githubusercontent.com/125300618/218547469-4ce1b165-fa1c-4abc-b7d8-d4f6fabe0f6e.png)
+
+5. Copiamos el código que aparece en el repositorio dentro de *main.gs* a la nueva hoja del proyecto de Appscript. Recorda asignarle a la variable "*KUBERNETES_TOKEN*" el valor de tu Token obtenido en el Paso 4 y a la variable "*PROJECT_ID*" el ID de tu proyecto de Google Cloud.
+
+![image](https://user-images.githubusercontent.com/125300618/218555388-6cfad885-b1cb-4252-b97d-c1a8dc12a88d.png)
 
 6. En la configuración del proyecto de Appscript, comprobamos que tenemos marcada la opción "*Mostrar el archivo de manifiesto "appsscript.json" en el editor*".
 
   ![image](https://user-images.githubusercontent.com/125300618/218546963-3d74d7e7-acdc-4715-879c-4838c9e63ea2.png)
 
-7. Copiamos el contenido del archivo "*appscript.json" del repositorio al archivo dentro de nuestro proyecto Appscript
+7. Copiamos las oauthScopes dentro de una nueva propiedad en el archivo "*appscript.json*" de nuestro proyecto. Debería quedar así:
 
 ![image](https://user-images.githubusercontent.com/125300618/218547126-e8b76dbb-8676-493c-a3b8-fcc20d66923f.png)
 
