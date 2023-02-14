@@ -1,6 +1,8 @@
 function makeRequest() {
   try {
     const ACCESS_TOKEN = ScriptApp.getOAuthToken()
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet()
+    
 
     // INSERT PROJECT ID HERE!
     const PROJECT_ID = ""
@@ -18,6 +20,13 @@ function makeRequest() {
     })
     let clusterResponseObj = JSON.parse(clusterResponse)
 
+    let clusters = []
+    clusterResponseObj.clusters.forEach((cluster) => clusters.push([cluster.name]))
+
+    sheet.getRange("B2:B").clear()
+    sheet.getRange(1,2).setValue("Clusters").setFontWeight("bold")
+    sheet.getRange(2,2, clusters.length, 1).setValues(clusters)
+
     // Gets the first cluster and builds the route (Built like this for testing purposes)
     const PUBLIC_ADRESS = "https://" + clusterResponseObj.clusters[0].privateClusterConfig.publicEndpoint + "/api/v1/pods"
 
@@ -28,17 +37,18 @@ function makeRequest() {
       let podsResponseObj = JSON.parse(podsResponse)
 
       let pods = []
-
       podsResponseObj.items.forEach((item) => pods.push([item.metadata.name]))
 
-      const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet()
       sheet.getRange("A2:A").clear()
+      sheet.getRange(1,1).setValue("Pods").setFontWeight("bold")
       sheet.getRange(2,1, pods.length, 1).setValues(pods)
+
+      Logger.log("Datos cargados correctamente.")
+    } else {
+      Logger.log("Inserte token de Kubernetes.")
     }
 
-    Logger.log("Datos cargados correctamente.")
   } catch(e) {
     Logger.log("Error en el procesamiento: " + e)
   }
-
 }
