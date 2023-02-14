@@ -102,7 +102,7 @@ echo $TOKEN
 
 9. Los nombres de los Pods aparecerán en la Columna "A" de nuestra hoja de Google Sheets.
 
-![image](https://user-images.githubusercontent.com/125300618/218550709-86882109-4d90-4bd7-a5d3-6b08e8dda429.png)
+![image](https://user-images.githubusercontent.com/125300618/218628483-77f60ecb-654b-43f6-9613-11b7d956fc42.png)
 
 
 
