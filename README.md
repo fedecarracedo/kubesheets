@@ -100,7 +100,7 @@ echo $TOKEN
 
 ![image](https://user-images.githubusercontent.com/125300618/218550586-ee158f21-5aa3-42a4-bbfa-ecf644a1e1fb.png)
 
-9. Los nombres de los Pods aparecerán en la Columna "A" de nuestra hoja de Google Sheets.
+9. Los nombres de los Pods y Clusters aparecerán en las primeras columnas de nuestra hoja de Google Sheets.
 
 ![image](https://user-images.githubusercontent.com/125300618/218628483-77f60ecb-654b-43f6-9613-11b7d956fc42.png)
 
