@@ -21,7 +21,7 @@ function makeRequest() {
     // Gets the first cluster and builds the route (Built like this for testing purposes)
     const PUBLIC_ADRESS = "https://" + clusterResponseObj.clusters[0].privateClusterConfig.publicEndpoint + "/api/v1/pods"
 
-    if(kubeToken !== "") {
+    if(KUBERNETES_TOKEN !== "") {
       let podsResponse = UrlFetchApp.fetch(PUBLIC_ADRESS, {"headers": {
         Authorization: 'Bearer ' + KUBERNETES_TOKEN
       }, validateHttpsCertificates: false, muteHttpExceptions: true})
