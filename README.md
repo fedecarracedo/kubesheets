@@ -2,7 +2,9 @@
 
 ### ¿Qué hace esta aplicación?
 
-Kubesheets permite incluír los nombres de los Pods que estan presentes en los Clusters de Kubernetes que hayas creado en Google Cloud usando el Google Kubernetes Engine (GKE), en una hoja de Google Sheets.
+Kubesheets permite mostrar los nombres de los Pods y los Clusters de Kubernetes que hayas creado en Google Cloud usando el Google Kubernetes Engine (GKE), en una hoja de Google Sheets.
+
+El fin de esta aplicación es demostrar la integración entre Appscript, la API de GKE y la API de Kubernetes.
 
 ### Requisitos para que funcione
 
