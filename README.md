@@ -23,6 +23,12 @@ rules:
   
 ```
 
+O sino por consola:
+
+```
+kubectl create clusterrole service-reader --verb=get,watch,list --resource=services,pods
+```
+
 Y luego bindeando ese rol a la cuenta *default:default* desde la consola usando kubectl:
 
 ```
