@@ -55,15 +55,6 @@ kubectl create clusterrolebinding service-reader-pod \
 4. Vamos a necesitar un Token de acceso que nos va a dar Kubectl para interactuar con la API de Kubernetes. Copia y pega este código en la consola, reemplazando *YOUR CLUSTER NAME* con el nombre del Cluster al que desees acceder y guarda el Token que se emite al final:
 
 ```
-# Check all possible clusters, as your .KUBECONFIG may have multiple contexts:
-kubectl config view -o jsonpath='{"Cluster name\tServer\n"}{range .clusters[*]}{.name}{"\t"}{.cluster.server}{"\n"}{end}'
-
-# Select name of cluster you want to interact with from above output:
-export CLUSTER_NAME="<YOUR CLUSTER NAME>"
-
-# Point to the API server referring the cluster name
-APISERVER=$(kubectl config view -o jsonpath="{.clusters[?(@.name==\"$CLUSTER_NAME\")].cluster.server}")
-
 # Create a secret to hold a token for the default service account
 kubectl apply -f - <<EOF
 apiVersion: v1
