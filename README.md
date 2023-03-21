@@ -2,7 +2,7 @@
 
 ### ¿Qué hace esta aplicación?
 
-Kubesheets permite listar la información de tu Cluster de Kubernetes en una hoja de cálculo de Google.
+Kubesheets permite administrar tu Cluster de Kubernetes desde una hoja de cálculo de Google, desde simplemente visualizar la información hasta crear nuevas réplicas de tus pods.
 
 ### Requisitos para que funcione
 
