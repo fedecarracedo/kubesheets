@@ -9,8 +9,8 @@ function onOpen() {
 // Updates the information in the sheets to match that of the current state of the cluster
 function processClusters() {
   const documentProperties = PropertiesService.getDocumentProperties();
-  const KUBE_TOKEN = documentProperties.getProperty("KUBE_TOKEN")
-  const CLUSTER_IP = documentProperties.getProperty("CLUSTER_IP")
+  let KUBE_TOKEN = documentProperties.getProperty("KUBE_TOKEN")
+  let CLUSTER_IP = documentProperties.getProperty("CLUSTER_IP")
 
   if(!KUBE_TOKEN || !CLUSTER_IP) {
     saveCredentials()
