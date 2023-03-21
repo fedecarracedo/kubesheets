@@ -37,7 +37,7 @@ kubectl create clusterrolebinding service-reader-pod \
 
 ### ¿Cómo se usa?
 
-1. Creamos una nueva hoja de cálculo de Google Sheets y, en la cinta superior de opciones, seleccionamos *Extenciones > Appscript*. Esto va a crear un nuevo proyecto de Appscript para que trabajemos.
+1. Creamos una nueva hoja de cálculo de Google Sheets y, en la cinta superior de opciones, seleccionamos *Extensiones > Appscript*. Esto va a crear un nuevo proyecto de Appscript para que trabajemos.
 
 ![image](https://user-images.githubusercontent.com/125300618/218547280-5ed66d41-db73-4ab0-b8a0-48e9c9d61522.png)
 
