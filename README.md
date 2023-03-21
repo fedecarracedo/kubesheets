@@ -18,8 +18,8 @@ metadata:
   name: service-reader
 rules:
 - apiGroups: [""] # "" indicates the core API group
-  resources: ["services", "pods"]
-  verbs: ["get", "watch", "list"]
+  resources: ["services", "pods", "deployments"]
+  verbs: ["get", "watch", "list", "patch"]
   
 ```
 
