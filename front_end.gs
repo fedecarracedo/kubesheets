@@ -1,7 +1,7 @@
 function onOpen() {
-  SpreadsheetApp.getUi().createMenu("Test")
-  .addItem("Config credentials", "saveCredentials")
-  .addItem("List clusters", "processClusters")
+  SpreadsheetApp.getUi().createMenu("Kubesheets")
+  .addItem("Reset credentials", "saveCredentials")
+  .addItem("List cluster", "processClusters")
   .addToUi()
 }
 
