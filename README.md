@@ -2,9 +2,7 @@
 
 ### ¿Qué hace esta aplicación?
 
-Kubesheets permite mostrar los nombres de los Pods y los Clusters de Kubernetes que hayas creado en Google Cloud usando el Google Kubernetes Engine (GKE), en una hoja de Google Sheets.
-
-El fin de esta aplicación es demostrar la integración entre Appscript, la API de GKE y la API de Kubernetes.
+Kubesheets permite listar la información de tu Cluster de Kubernetes en una hoja de cálculo de Google.
 
 ### Requisitos para que funcione
 
@@ -39,20 +37,11 @@ kubectl create clusterrolebinding service-reader-pod \
 
 ### ¿Cómo se usa?
 
-1. Creamos un Cluster en GKE y le agregamos nuestros Pods. <a href="https://cloud.google.com/binary-authorization/docs/getting-started-cli?hl=es-419">Link al instructivo</a>
-
-![image](https://user-images.githubusercontent.com/125300618/218554601-11967200-bbb6-4899-b54d-53b108d3f7f9.png)
-
-
-2. Creamos una nueva hoja de cálculo de Google Sheets y, en la cinta superior de opciones, seleccionamos *Extenciones > Appscript*. Esto va a crear un nuevo proyecto de Appscript para que trabajemos.
+1. Creamos una nueva hoja de cálculo de Google Sheets y, en la cinta superior de opciones, seleccionamos *Extenciones > Appscript*. Esto va a crear un nuevo proyecto de Appscript para que trabajemos.
 
 ![image](https://user-images.githubusercontent.com/125300618/218547280-5ed66d41-db73-4ab0-b8a0-48e9c9d61522.png)
 
-3. Asociamos nuestra hoja de Appscript a nuestro Proyecto de Google Cloud donde hayamos creado los Clusters. Nota: Para esto es necesario tener configurada la *Pantalla de Consentimiento de Oauth*
-
-![image](https://user-images.githubusercontent.com/125300618/218549793-3481266c-e4f9-4839-a762-d62518a148d2.png)
-
-4. Vamos a necesitar un Token de acceso que nos va a dar Kubectl para interactuar con la API de Kubernetes. Copia y pega este código en la consola, reemplazando *YOUR CLUSTER NAME* con el nombre del Cluster al que desees acceder y guarda el Token que se emite al final:
+2. Vamos a necesitar un Token de acceso que nos va a dar Kubectl para interactuar con la API de Kubernetes. Copia y pega este código en la consola y guarda el Token que se emite al final:
 
 ```
 # Create a secret to hold a token for the default service account
@@ -81,25 +70,26 @@ echo $TOKEN
 ![image](https://user-images.githubusercontent.com/125300618/218555118-2b4ec39e-00fb-439b-8a2f-07d836c4464c.png)
 
 
-5. Copiamos el código que aparece en el repositorio dentro de *main.gs* a la nueva hoja del proyecto de Appscript. Recorda asignarle a la variable "*KUBERNETES_TOKEN*" el valor de tu Token obtenido en el Paso 4 y a la variable "*PROJECT_ID*" el ID de tu proyecto de Google Cloud.
+3. Copiamos el código que aparece en el repositorio dentro de *front_end.gs* a la nueva hoja del proyecto de Appscript.
 
-![image](https://user-images.githubusercontent.com/125300618/218555388-6cfad885-b1cb-4252-b97d-c1a8dc12a88d.png)
+![image](https://user-images.githubusercontent.com/125300618/226501991-afc2bf30-4820-41c1-806c-e3c41bd4b06f.png)
 
-6. En la configuración del proyecto de Appscript, comprobamos que tenemos marcada la opción "*Mostrar el archivo de manifiesto "appsscript.json" en el editor*".
 
-  ![image](https://user-images.githubusercontent.com/125300618/218546963-3d74d7e7-acdc-4715-879c-4838c9e63ea2.png)
+4. Reiniciamos la página de nuestra nueva hoja de cálculo. Debería aparecernos un nuevo menú en la cinta de opciones.
 
-7. Copiamos las oauthScopes dentro de una nueva propiedad en el archivo "*appscript.json*" de nuestro proyecto. Debería quedar así:
+![image](https://user-images.githubusercontent.com/125300618/226502266-724aa81c-0fcd-4258-a83f-ab5ba3bd010d.png)
 
-![image](https://user-images.githubusercontent.com/125300618/218547126-e8b76dbb-8676-493c-a3b8-fcc20d66923f.png)
+5. Elegimos la opción que dice "List cluster". Nos pedirá una serie de permisos y deberemos dar nuestra autorización.
 
-8. Ejecutamos la función "*makeRequest*". 
+![image](https://user-images.githubusercontent.com/125300618/226502613-446cb9d0-2fb0-4b45-80d5-d12c012377ee.png)
 
-![image](https://user-images.githubusercontent.com/125300618/218550586-ee158f21-5aa3-42a4-bbfa-ecf644a1e1fb.png)
+6. El programa nos pedirá nuestra dirección IP pública del cluster y el Token que generamos previamente. Insertamos ambas cosas y le damos a "Aceptar".
 
-9. Los nombres de los Pods y Clusters aparecerán en las primeras columnas de nuestra hoja de Google Sheets.
+![image](https://user-images.githubusercontent.com/125300618/226502782-cc594b78-498d-48dd-a4ea-65b8c48217bb.png)
 
-![image](https://user-images.githubusercontent.com/125300618/218628483-77f60ecb-654b-43f6-9613-11b7d956fc42.png)
+7. Veremos que se crean nuevas hojas en el documento, cáda una correspondiente a un namespace de nuestro cluster.
+
+![image](https://user-images.githubusercontent.com/125300618/226502905-a0774044-b3a9-4ac2-96dc-ef27e9c11526.png)
 
 
 
