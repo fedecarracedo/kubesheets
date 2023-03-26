@@ -1,14 +1,14 @@
 # kubesheets
 
-### ¿Qué hace esta aplicación?
+### What does this program do?
 
-Kubesheets permite mostrar los nombres de los Pods y los Clusters de Kubernetes que hayas creado en Google Cloud usando el Google Kubernetes Engine (GKE), en una hoja de Google Sheets.
+Kubesheets allows you to administer your Kubernetes Cluster from a Google Spreadsheet. From simply visualizing your data to creating new replicas of your pods.
 
-El fin de esta aplicación es demostrar la integración entre Appscript, la API de GKE y la API de Kubernetes.
-
-### Requisitos para que funcione
+### Usage requirements
 
 Para que Kubesheets funcione, debemos darle al role *default:default* los permisos necesarios para leer Pods. Esto podemos lograrlo creando un ClusterRole dentro de la Resource Definition de nuestros pods de la siguiente forma:
+
+In order for Kubesheets to work, we need to create a role with the necessary permissions. This can be achieved by creating a ClusterRole inside our Resource Definition like so:
 
 ```
 apiVersion: rbac.authorization.k8s.io/v1
@@ -23,13 +23,13 @@ rules:
   
 ```
 
-O sino por consola:
+Or using kubectl:
 
 ```
 kubectl create clusterrole service-reader --verb=get,watch,list,patch --resource=services,pods,deployments
 ```
 
-Y luego bindeando ese rol a la cuenta *default:default* desde la consola usando kubectl:
+And then binding that role using kubectl:
 
 ```
 kubectl create clusterrolebinding service-reader-pod \
@@ -37,22 +37,13 @@ kubectl create clusterrolebinding service-reader-pod \
   --serviceaccount=default:default
 ```
 
-### ¿Cómo se usa?
+### How to use Kubesheets
 
-1. Creamos un Cluster en GKE y le agregamos nuestros Pods. <a href="https://cloud.google.com/binary-authorization/docs/getting-started-cli?hl=es-419">Link al instructivo</a>
-
-![image](https://user-images.githubusercontent.com/125300618/218554601-11967200-bbb6-4899-b54d-53b108d3f7f9.png)
-
-
-2. Creamos una nueva hoja de cálculo de Google Sheets y, en la cinta superior de opciones, seleccionamos *Extenciones > Appscript*. Esto va a crear un nuevo proyecto de Appscript para que trabajemos.
+1. Create a new Google Spreadsheets and, in the top menu, select *Extensions > Appscript*. This will create a new Appscript project for us to work in.
 
 ![image](https://user-images.githubusercontent.com/125300618/218547280-5ed66d41-db73-4ab0-b8a0-48e9c9d61522.png)
 
-3. Asociamos nuestra hoja de Appscript a nuestro Proyecto de Google Cloud donde hayamos creado los Clusters. Nota: Para esto es necesario tener configurada la *Pantalla de Consentimiento de Oauth*
-
-![image](https://user-images.githubusercontent.com/125300618/218549793-3481266c-e4f9-4839-a762-d62518a148d2.png)
-
-4. Vamos a necesitar un Token de acceso que nos va a dar Kubectl para interactuar con la API de Kubernetes. Copia y pega este código en la consola, reemplazando *YOUR CLUSTER NAME* con el nombre del Cluster al que desees acceder y guarda el Token que se emite al final:
+2. We are going to need an access Token generated through Kubectl to interact with the Kubernetes API. Copy and paste this code in the console and save the Token printed at the end:
 
 ```
 # Create a secret to hold a token for the default service account
@@ -80,26 +71,29 @@ echo $TOKEN
 
 ![image](https://user-images.githubusercontent.com/125300618/218555118-2b4ec39e-00fb-439b-8a2f-07d836c4464c.png)
 
+3. Copy the code inside the *front_end.gs* file and paste it inside your recently created Appscript project:
 
-5. Copiamos el código que aparece en el repositorio dentro de *main.gs* a la nueva hoja del proyecto de Appscript. Recorda asignarle a la variable "*KUBERNETES_TOKEN*" el valor de tu Token obtenido en el Paso 4 y a la variable "*PROJECT_ID*" el ID de tu proyecto de Google Cloud.
+![image](https://user-images.githubusercontent.com/125300618/226501991-afc2bf30-4820-41c1-806c-e3c41bd4b06f.png)
 
-![image](https://user-images.githubusercontent.com/125300618/218555388-6cfad885-b1cb-4252-b97d-c1a8dc12a88d.png)
+4. We'll need to add the "AKI" library to our project pasting the following code inside the "Script ID" field, "1AssMGoAr4zEdnvFQNdfQTznSbSLLwvteD6p_EAPJlG8Dchch0vqf0vVn". This contains some basic classes to interact with the Kubernetes API from the Appscript enviroment. If you're interested in it, check the *back_end.gs* file:
 
-6. En la configuración del proyecto de Appscript, comprobamos que tenemos marcada la opción "*Mostrar el archivo de manifiesto "appsscript.json" en el editor*".
+![image](https://user-images.githubusercontent.com/125300618/226503381-19270cd6-0411-4cab-a568-ae271859d79a.png)
 
-  ![image](https://user-images.githubusercontent.com/125300618/218546963-3d74d7e7-acdc-4715-879c-4838c9e63ea2.png)
+5. Reload the Spreadsheet. We should see a new menu in the top options:
 
-7. Copiamos las oauthScopes dentro de una nueva propiedad en el archivo "*appscript.json*" de nuestro proyecto. Debería quedar así:
+![image](https://user-images.githubusercontent.com/125300618/226502266-724aa81c-0fcd-4258-a83f-ab5ba3bd010d.png)
 
-![image](https://user-images.githubusercontent.com/125300618/218547126-e8b76dbb-8676-493c-a3b8-fcc20d66923f.png)
+6. Choose the option that says "List cluster". It should ask for a series of permissions and we must give our consent.
 
-8. Ejecutamos la función "*makeRequest*". 
+![image](https://user-images.githubusercontent.com/125300618/226502613-446cb9d0-2fb0-4b45-80d5-d12c012377ee.png)
 
-![image](https://user-images.githubusercontent.com/125300618/218550586-ee158f21-5aa3-42a4-bbfa-ecf644a1e1fb.png)
+7. Once running, the program will ask for our Public Cluster IP and the previously generated Kubernetes Token. Insert this information when prompted and click "Accept". 
 
-9. Los nombres de los Pods y Clusters aparecerán en las primeras columnas de nuestra hoja de Google Sheets.
+![image](https://user-images.githubusercontent.com/125300618/226502782-cc594b78-498d-48dd-a4ea-65b8c48217bb.png)
 
-![image](https://user-images.githubusercontent.com/125300618/218628483-77f60ecb-654b-43f6-9613-11b7d956fc42.png)
+8. We'll see new Sheets being created in the Spreadsheet, each one corresponding to a different namespace inside our cluster.
+
+![image](https://user-images.githubusercontent.com/125300618/226502905-a0774044-b3a9-4ac2-96dc-ef27e9c11526.png)
 
 
 
