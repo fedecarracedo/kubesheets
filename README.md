@@ -6,8 +6,6 @@ Kubesheets allows you to administer your Kubernetes Cluster from a Google Spread
 
 ### Usage requirements
 
-Para que Kubesheets funcione, debemos darle al role *default:default* los permisos necesarios para leer Pods. Esto podemos lograrlo creando un ClusterRole dentro de la Resource Definition de nuestros pods de la siguiente forma:
-
 In order for Kubesheets to work, we need to create a role with the necessary permissions. This can be achieved by creating a ClusterRole inside our Resource Definition like so:
 
 ```
@@ -68,8 +66,6 @@ TOKEN=$(kubectl get secret default-token -o jsonpath='{.data.token}' | base64 --
 
 echo $TOKEN
 ```
-
-![image](https://user-images.githubusercontent.com/125300618/218555118-2b4ec39e-00fb-439b-8a2f-07d836c4464c.png)
 
 3. Copy the code inside the *front_end.gs* file and paste it inside your recently created Appscript project:
 
