@@ -2,7 +2,7 @@
 
 ### What does this program do?
 
-Kubesheets allows you to administer your Kubernetes Cluster from a Google Spreadsheet. From simply visualizing your data to creating new replicas of your pods.
+Kubesheets allows you to administer your Kubernetes Cluster in the Google Kubernetes Engine (GKE) from a Google Spreadsheet. From simply visualizing your data to creating new replicas of your pods.
 
 ### Usage requirements
 
